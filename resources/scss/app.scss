@@ -1,0 +1,50 @@
+@import "bootstrap/scss/bootstrap";
+
+.card-place {
+    position: relative;
+    color: #718093;
+    font-size: 13px;
+    font-weight: 300;
+    .image-container {
+        height: 200px;
+        overflow: hidden;
+        margin-bottom: 10px;
+        border-radius: 15px;
+        @extend .d-flex;
+        .like-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #fff;
+            border-radius: 100%;
+            padding-top: 7px;
+            @extend .btn, .btn-light;
+            color: #353b48;
+        }
+        img {
+            width: 100%;
+            @extend .align-self-center;
+            min-height: 200px;
+        }
+    }
+    .logo-and-name {
+        min-height: 50px;
+        h5 {
+            color: #222;
+        }
+    }
+    
+    .score-badge {
+        @extend .badge, .bg-info;
+        color: #fff;
+        margin-right: 5px;
+    }
+}
+
+
+.text-pink {
+    color: #be2edd;
+}
+.text-blue {
+    color: #192a56;
+}

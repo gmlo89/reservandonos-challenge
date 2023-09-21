@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 // List places
-Route::get('places', PlacesController::class)->name('places');
+Route::get('places', PlacesController::class)->name('api.places');
