@@ -1,4 +1,7 @@
 <script setup>
+import LikeButton from './LikeButton.vue';
+
+
 const props = defineProps({
     place: {
         required: true,
@@ -9,9 +12,7 @@ const props = defineProps({
 <template>
     <div class="card-place">
         <div class="image-container">
-            <button type="button" class="like-button">
-                <i class="bi bi-heart-fill"></i>
-            </button>
+            <LikeButton :place="place" />
             <img :src="place.image_url" :alt="place.name" />
         </div>
         <div class="card-body">
