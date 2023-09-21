@@ -18,4 +18,4 @@ use Illuminate\Support\Facades\Route;
 // List places
 
 Route::get('places', [PlacesController::class, 'index'])->name('api.places');
-Route::get('places/like', [PlacesController::class, 'like'])->name('api.places.like');
+Route::put('places/like', [PlacesController::class, 'like'])->name('api.places.like');

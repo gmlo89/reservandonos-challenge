@@ -19,8 +19,8 @@ class PlaceDetailResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'place_id' => $this->place_id,
-            'votes' => $this->votes,
+            'placeId' => $this->place_id,
+            'likes' => $this->likes,
         ];
     }
 }
