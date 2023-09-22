@@ -41,9 +41,11 @@ const sendForm = () => {
 };
 </script>
 <template>
-    <div class="card">
+    <div class="card mb-3">
         <div class="card-body">
-            <h5 class="card-title">Reservar</h5>
+            <h5 class="card-title">
+                <i class="bi bi-calendar2-heart"></i> Reservar
+            </h5>
             <div class="alert alert-warning" role="alert" v-if="errorMessage">
                 {{ errorMessage }}
             </div>
@@ -91,7 +93,7 @@ const sendForm = () => {
             </div>
         </div>
         <div class="card-footer d-grid gap-2">
-            <button type="button" class="btn btn-primary" @click="sendForm">
+            <button type="button" class="btn btn-primary rounded-0" @click="sendForm">
                 Reservar
             </button>
         </div>

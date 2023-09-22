@@ -30,8 +30,8 @@ class StoreReservationRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([
-            'name' => strSanatize($this->name ?? ''),
-            'lastName' => strSanatize($this->lastName ?? ''),
+            'name' => strtolower(strSanatize($this->name ?? '')),
+            'lastName' => strtolower(strSanatize($this->lastName ?? '')),
         ]);
     }
 }

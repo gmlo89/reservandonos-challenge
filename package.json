@@ -19,6 +19,7 @@
         "sweetalert2": "^11.7.28",
         "vue": "^3.3.4",
         "vue-rewards": "^1.0.1",
-        "vue-router": "^4.2.4"
+        "vue-router": "^4.2.4",
+        "vue3-carousel": "^0.3.1"
     }
 }

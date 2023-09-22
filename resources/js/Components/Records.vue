@@ -12,16 +12,26 @@ const filters = ref({
 
 const rows = computed(() => {
     return _.filter(places.value, (item) => {
-        
-        if( filters.value.placeName && !item.name.includes(filters.value.placeName) )
+        if (
+            filters.value.placeName &&
+            !item.name.includes(filters.value.placeName)
+        )
             return false;
-        if( filters.value.preferredCustomerName && !item.preferredCustomerName.includes(filters.value.preferredCustomerName) )
+        if (
+            filters.value.preferredCustomerName &&
+            !item.preferredCustomerName.includes(
+                filters.value.preferredCustomerName
+            )
+        )
             return false;
 
-        if( filters.value.reservationsCount && item.reservationsCount !== filters.value.reservationsCount )
+        if (
+            filters.value.reservationsCount &&
+            item.reservationsCount !== filters.value.reservationsCount
+        )
             return false;
-        
-        if( filters.value.likesCount && item.likes !== filters.value.likesCount )
+
+        if (filters.value.likesCount && item.likes !== filters.value.likesCount)
             return false;
 
         return true;
@@ -36,9 +46,11 @@ onMounted(() => {
 </script>
 <template>
     <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Records</h5>
-            <table class="table table-striped">
+        <div class="card-body p-0">
+            <h5 class="card-title m-3">
+                <i class="bi bi-stars text-primary"></i> Records
+            </h5>
+            <table class="table table-striped mb-0">
                 <thead>
                     <tr class="table-primary">
                         <th class="text-center">
@@ -62,7 +74,9 @@ onMounted(() => {
                                     placeholder="Filtrar"
                                     v-model="filters.reservationsCount"
                                 />
-                                <label for="inputReservationsCount">Reservaciones</label>
+                                <label for="inputReservationsCount"
+                                    >Reservaciones</label
+                                >
                             </div>
                         </th>
                         <th class="text-center">
@@ -86,7 +100,9 @@ onMounted(() => {
                                     placeholder="Filtrar"
                                     v-model="filters.preferredCustomerName"
                                 />
-                                <label for="inputPreferredCustomer">Cliente Preferido</label>
+                                <label for="inputPreferredCustomer"
+                                    >Cliente Preferido</label
+                                >
                             </div>
                         </th>
                     </tr>
@@ -98,10 +114,21 @@ onMounted(() => {
                         </td>
                     </tr>
                     <tr v-for="row in rows" :key="row.id">
-                        <td>{{ row.name }}</td>
+                        <td>
+                            <router-link
+                                :to="{
+                                    name: 'place',
+                                    params: { placeId: row.placeId },
+                                }"
+                            >
+                                {{ row.name }}
+                            </router-link>
+                        </td>
                         <td class="text-center">{{ row.reservationsCount }}</td>
                         <td class="text-center">{{ row.likes }}</td>
-                        <td>{{ row.preferredCustomerName }}</td>
+                        <td class="text-capitalize">
+                            {{ row.preferredCustomerName }}
+                        </td>
                     </tr>
                 </tbody>
             </table>
