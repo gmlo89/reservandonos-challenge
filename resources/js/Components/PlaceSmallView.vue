@@ -33,7 +33,7 @@ const imgUrl = computed(() => {
                         class="img-fluid"
                     />
                 </div>
-                <div :class="{ 'col-10': isSmallVersion, 'col-12': !isSmallVersion }">
+                <div :class="{ 'col-10': !isSmallVersion, 'col-12': isSmallVersion }">
                     <h5 class="card-title">
                         <router-link
                             :to="{
