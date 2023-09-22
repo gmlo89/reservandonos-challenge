@@ -15,7 +15,7 @@ cp .env.example .env
 php artisan key:generate
 
 # Run migrations
-php artisan key:generate
+php artisan migrate
 
 # build CSS and JS assets
 npm run dev
