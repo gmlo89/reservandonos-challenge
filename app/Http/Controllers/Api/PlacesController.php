@@ -9,6 +9,7 @@ use App\Http\Resources\PlaceCollection;
 use App\Http\Resources\PlaceDetailResource;
 use App\Models\Place;
 use App\Services\Reservandonos;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class PlacesController extends Controller
@@ -34,6 +35,27 @@ class PlacesController extends Controller
     public function like(LikeToPlaceRequest $request): PlaceDetailResource
     {
         $place = Place::addLike($request->placeId);
+        return new PlaceDetailResource($place);
+    }
+
+    /**
+     * Get all details from a place by ID
+     *
+     * @param integer $placeId
+     * @return PlaceDetailResource|JsonResponse
+     */
+    public function detail(string $placeId): PlaceDetailResource|JsonResponse
+    {
+        $detailData = Reservandonos::getPlaceById((int)$placeId);
+        
+        if( !is_array($detailData) )
+        {
+            return response()->json(['message' => 'Incorrect Id'], 422);
+        }
+
+        $place = Place::findByPlaceIdOrCreate((int)$placeId);
+        $place->setDetails($detailData);
+
         return new PlaceDetailResource($place);
     }
 }

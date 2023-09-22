@@ -30,7 +30,11 @@
     .logo-and-name {
         min-height: 50px;
         h5 {
-            color: #222;
+            
+            a {
+                color: #222;
+                text-decoration: none;
+            }
         }
     }
     

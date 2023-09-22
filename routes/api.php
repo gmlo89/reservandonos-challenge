@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\PlacesController;
+use App\Http\Controllers\Api\ReservationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,3 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('places', [PlacesController::class, 'index'])->name('api.places');
 Route::put('places/like', [PlacesController::class, 'like'])->name('api.places.like');
+Route::get('places/{placeId}/detail', [PlacesController::class, 'detail'])->name('api.places.detail');
+
+
+Route::post('reservation', [ReservationController::class, 'store'])->name('reservation.store');

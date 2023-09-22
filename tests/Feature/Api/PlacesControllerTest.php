@@ -1,9 +1,10 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Api;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
 
+use App\Exceptions\ReservandonosException;
 use App\Models\Place;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -78,5 +79,37 @@ class PlacesControllerTest extends TestCase
         $response->assertJsonStructure(['place' => ['id', 'placeId', 'likes']]);
         
         $response->assertJsonPath('place.likes', $place->likes + 1);
+    }
+
+    /**
+     * Test that you can get details from a place
+     *
+     * @return void
+     */
+    public function testGetDetailFromPlace(): void
+    {
+        $placeId = 3944;
+        
+        $response = $this->json('GET', "/api/places/{$placeId}/detail");
+
+        $response->assertCreated();
+
+        $response->assertJsonStructure(['place' => ['id', 'placeId', 'likes', 'details']]);
+    }
+    
+    
+    /**
+     * Test that you can validate the ID when try to get details from a place
+     *
+     * @return void
+     */
+    public function testGetDetailFromPlaceWithIncorrectId(): void
+    {
+        $this->expectException(ReservandonosException::class);
+        $placeId = "some-incorrect-id";
+        
+        $response = $this->withoutExceptionHandling()->json('GET', "/api/places/{$placeId}/detail");
+
+        $response->assertStatus(500);
     }
 }

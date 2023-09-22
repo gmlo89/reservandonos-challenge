@@ -1,6 +1,5 @@
 <script setup>
-import LikeButton from './LikeButton.vue';
-
+import LikeButton from "./LikeButton.vue";
 
 const props = defineProps({
     place: {
@@ -26,7 +25,13 @@ const props = defineProps({
                 </div>
                 <div class="col-10">
                     <h5 class="card-title">
-                        {{ place.name }}
+                        <router-link
+                            :to="{
+                                name: 'place',
+                                params: { placeId: place.id },
+                            }"
+                            >{{ place.name }}</router-link
+                        >
                     </h5>
                 </div>
             </div>

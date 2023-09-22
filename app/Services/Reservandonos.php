@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Exceptions\ReservandonosException;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
@@ -24,7 +26,6 @@ class Reservandonos
     {
         return new Reservandonos();
     }
-
     /**
      * Do a get request to the endpoint sent
      *
@@ -34,7 +35,11 @@ class Reservandonos
      */
     protected function get(string $uri, array $query = []): Collection
     {
-        return collect(Http::get("{$this->baseUrl}{$uri}", $query)->json());
+        $response = Http::get("{$this->baseUrl}{$uri}", $query);
+        if( $response->getStatusCode() == 200 )
+            return collect($response->json());
+        
+        throw new ReservandonosException($response->json('data'));
     }
 
     /**
@@ -46,5 +51,16 @@ class Reservandonos
     public static function getPlaces(int|null $page = 0): Collection
     {
         return self::instance()->get('places/getPlacesByFilter', ['mode' => 'web', 'page' => $page]);
+    }
+
+    /**
+     * Get a place details by ID
+     *
+     * @param integer $placeId
+     * @return array
+     */
+    public static function getPlaceById(int $placeId):array
+    {
+        return self::instance()->get("places/getPlaceById/{$placeId}")->first();
     }
 }
