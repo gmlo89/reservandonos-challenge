@@ -32,7 +32,7 @@ php artisan serve
 The Laravel sample project is now up and running! Access it at http://localhost:8000.
 
 
-## Installation with Docker (Doesn't work)
+## Installation with Docker
 
 
 ``` bash
@@ -42,11 +42,8 @@ cp .env.example .env
 # Run docker-compose
 docker-compose up -d --build
 
-# Enter in the bash 
-docker exec -it Serve /bin/sh
-
 # Run migrations
-php artisan migrate
+docker exec Serve php /app/artisan migrate
 
 ```
 

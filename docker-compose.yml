@@ -8,32 +8,29 @@ services:
     command: 'php artisan serve --host=0.0.0.0'
     ports:
       - 8000:8000
-  
-  migrate:
-    container_name: Migrate
-    build:
-      context: .
-      dockerfile: Dockerfile
-    command: 'php artisan migrate'
-    depends_on:
-      - db
-
+    networks:
+      - laravel-exa
 
   db:
-    platform: linux/x86_64
     image: mysql:8.0
     container_name: db
+    platform: linux/x86_64
     environment:
       MYSQL_DATABASE: "${DB_DATABASE}"
       MYSQL_USER: "${DB_USERNAME}"
-      MYSQL_ROOT: "root"
       MYSQL_PASSWORD: "${DB_PASSWORD}"
       MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
     volumes:
       - db:/var/lib/mysql
     ports:
-      - 8010:3306
+      - 3301:3306
+    networks:
+      - laravel-exa
       
 volumes:
   db:
     driver: local
+
+networks:
+  laravel-exa:
+    driver: bridge
