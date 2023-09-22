@@ -10,10 +10,7 @@
 </head>
 
 <body>
-    <div id="app">
-        <PlacesList/>
-        <places-list></places-list>
-    </div>
+    <div id="app"></div>
 </body>
 
 </html>
