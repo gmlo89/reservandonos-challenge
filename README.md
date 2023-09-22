@@ -45,11 +45,8 @@ docker-compose up -d --build
 # Enter in the bash 
 docker exec -it Serve /bin/sh
 
-# Generate a key
-php artisan key:generate
-
 # Run migrations
-php artisan key:generate
+php artisan migrate
 
 ```
 
