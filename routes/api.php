@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('places', [PlacesController::class, 'index'])->name('api.places');
 Route::put('places/like', [PlacesController::class, 'like'])->name('api.places.like');
 Route::get('places/{placeId}/detail', [PlacesController::class, 'detail'])->name('api.places.detail');
+Route::get('places/top-50', [PlacesController::class, 'top50'])->name('api.places.top-50');
 
 
 Route::post('reservation', [ReservationController::class, 'store'])->name('reservation.store');

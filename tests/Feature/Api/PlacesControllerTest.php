@@ -112,4 +112,18 @@ class PlacesControllerTest extends TestCase
 
         $response->assertStatus(500);
     }
+
+    /**
+     * Test to get the top 50
+     *
+     * @return void
+     */
+    public function testGetTop50(): void
+    {
+        $response = $this->json('GET', '/api/places/top-50');
+
+        $response->assertOk();
+
+        $response->assertJsonStructure(['data']);
+    }
 }

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\PlaceDontFound;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LikeToPlaceRequest;
 use App\Http\Requests\PlacesRequest;
 use App\Http\Resources\PlaceCollection;
 use App\Http\Resources\PlaceDetailResource;
+use App\Http\Resources\Top50\PlaceCollection as Top50PlaceCollection;
 use App\Models\Place;
 use App\Services\Reservandonos;
 use Illuminate\Http\JsonResponse;
@@ -47,15 +49,21 @@ class PlacesController extends Controller
     public function detail(string $placeId): PlaceDetailResource|JsonResponse
     {
         $detailData = Reservandonos::getPlaceById((int)$placeId);
-        
-        if( !is_array($detailData) )
-        {
-            return response()->json(['message' => 'Incorrect Id'], 422);
-        }
 
         $place = Place::findByPlaceIdOrCreate((int)$placeId);
         $place->setDetails($detailData);
+        
 
         return new PlaceDetailResource($place);
+    }
+
+    /**
+     * List the top 50 of places
+     *
+     * @return Top50PlaceCollection
+     */
+    public function top50():Top50PlaceCollection
+    {
+        return new Top50PlaceCollection(Place::top50());
     }
 }

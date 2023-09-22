@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\Services\Reservandonos;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 class Place extends Model
 {
@@ -63,5 +65,29 @@ class Place extends Model
     public function setDetails(array $data): void
     {
         $this->detailData = $data;
+        $this->name = $data['name'];
+        $this->save();
+    }
+
+    /**
+     * Return top 50
+     *
+     * @return Collection
+     */
+    public static function top50(): Collection
+    {
+        return Place::withCount('reservations')->whereHas('reservations')->orderBy('reservations_count', 'desc')->orderBy('likes', 'desc')->limit(50)->get();
+    }
+
+    /**
+     * Return the preferred customer
+     *
+     * @return Customer
+     */
+    public function preferredCustomer(): Customer
+    {
+        return Customer::withCount(['reservations' => function( Builder $query) {
+            $query->where('place_id', $this->id);
+        }])->orderBy('reservations_count', 'desc')->first();
     }
 }
