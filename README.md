@@ -10,14 +10,14 @@ Assuming you've already installed on your machine: PHP (>= 8.1.0), [Laravel](htt
 composer install
 npm install
 
-# create .env file and generate the application key
+# create .env file and generate the application key (You need to have a database created)
 cp .env.example .env
 php artisan key:generate
 
 # build CSS and JS assets
 npm run dev
 # or, if you prefer minified files
-npm run prod
+npm run build
 ```
 
 Then launch the server:
