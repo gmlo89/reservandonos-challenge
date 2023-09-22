@@ -3,10 +3,7 @@
 /**
  * Helpers
  */
-
-
- if( ! function_exists('strSanatize') )
- {
+if (! function_exists('strSanatize')) {
     function strSanatize(string $text): string
     {
         $text = str_replace(
@@ -17,4 +14,4 @@
 
         return preg_replace('([^A-Za-z\s])', '', $text);
     }
- }
+}

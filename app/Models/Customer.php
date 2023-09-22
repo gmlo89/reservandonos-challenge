@@ -20,7 +20,7 @@ class Customer extends Model
      *
      * @return HasMany
      */
-    public function reservations():HasMany
+    public function reservations(): HasMany
     {
         return $this->hasMany(Reservation::class);
     }
@@ -30,8 +30,8 @@ class Customer extends Model
      *
      * @return string
      */
-    public function getFullNameAttribute():string
+    public function getFullNameAttribute(): string
     {
-        return implode(" ", [$this->name, $this->last_name]);
+        return implode(' ', [$this->name, $this->last_name]);
     }
 }

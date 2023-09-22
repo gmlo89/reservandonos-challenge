@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class PlacesRequest extends FormRequest
 {
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -15,7 +14,7 @@ class PlacesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'page' => ['nullable', 'integer']
+            'page' => ['nullable', 'integer'],
         ];
     }
 }

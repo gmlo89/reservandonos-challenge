@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Services\Reservandonos;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,9 +12,8 @@ class Place extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
-        'place_id'
+        'place_id',
     ];
 
     public array $detailData;
@@ -25,7 +23,7 @@ class Place extends Model
      *
      * @return HasMany
      */
-    public function reservations():HasMany
+    public function reservations(): HasMany
     {
         return $this->hasMany(Reservation::class);
     }
@@ -33,33 +31,34 @@ class Place extends Model
     /**
      * Add a like to a place
      *
-     * @param integer $placeId
+     * @param  int  $placeId
      * @return Place
      */
     public static function addLike(int $placeId): Place
     {
         $place = self::findByPlaceIdOrCreate($placeId);
         $place->increment('likes');
+
         return $place;
     }
 
     /**
      * Find or create a place on the database
      *
-     * @param integer $placeId
+     * @param  int  $placeId
      * @return Place
      */
     public static function findByPlaceIdOrCreate(int $placeId): Place
     {
         return Place::firstOrCreate([
-            'place_id' => $placeId
+            'place_id' => $placeId,
         ]);
     }
 
     /**
      * set details data
      *
-     * @param array $data
+     * @param  array  $data
      * @return void
      */
     public function setDetails(array $data): void
@@ -86,7 +85,7 @@ class Place extends Model
      */
     public function preferredCustomer(): Customer
     {
-        return Customer::withCount(['reservations' => function( Builder $query) {
+        return Customer::withCount(['reservations' => function (Builder $query) {
             $query->where('place_id', $this->id);
         }])->orderBy('reservations_count', 'desc')->first();
     }

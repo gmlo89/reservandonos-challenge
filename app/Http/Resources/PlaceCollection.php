@@ -18,6 +18,7 @@ class PlaceCollection extends ResourceCollection
         if ($this->collection['showMore']) {
             $nextPage = route('api.places', ['page' => ($this->collection['page'] + 1)]);
         }
+
         return [
             'places' => $this->collection['data'] ?? [],
             'nextPage' => $nextPage,

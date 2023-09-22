@@ -20,7 +20,7 @@ class PlaceResource extends JsonResource
             'name' => $this->name,
             'placeId' => $this->place_id,
             'reservationsCount' => $this->reservations_count,
-            'preferredCustomerName' => $this->preferredCustomer()->fullName
+            'preferredCustomerName' => $this->preferredCustomer()->fullName,
         ];
     }
 }

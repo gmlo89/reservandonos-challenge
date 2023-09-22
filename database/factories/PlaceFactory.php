@@ -18,7 +18,7 @@ class PlaceFactory extends Factory
     {
         return [
             'place_id' => fake()->randomNumber(),
-            'likes' => fake()->randomNumber(1)
+            'likes' => fake()->randomNumber(1),
         ];
     }
 }

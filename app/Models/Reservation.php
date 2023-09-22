@@ -21,20 +21,19 @@ class Reservation extends Model
     /**
      * Store a new reservation
      *
-     * @param string $name
-     * @param string $lastName
-     * @param Carbon $date
-     * @param string $time
-     * @param string $placeId
+     * @param  string  $name
+     * @param  string  $lastName
+     * @param  Carbon  $date
+     * @param  string  $time
+     * @param  string  $placeId
      * @return Reservation
      */
     public static function createNew(string $name, string $lastName, Carbon $date, string $time, string $placeId): Reservation
     {
         $place = Place::findOrFail($placeId);
 
-        if( $place->reservations()->whereDate('date', $date)->where('time', $time)->first() )
-        {
-            throw new DuplicateReservationException("No se encuenta disponible esta fecha y hora de reservación");
+        if ($place->reservations()->whereDate('date', $date)->where('time', $time)->first()) {
+            throw new DuplicateReservationException('No se encuenta disponible esta fecha y hora de reservación');
         }
 
         $customer = Customer::firstOrCreate([

@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class LikeToPlaceRequest extends FormRequest
 {
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -15,7 +14,7 @@ class LikeToPlaceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'placeId' => ['required', 'integer']
+            'placeId' => ['required', 'integer'],
         ];
     }
 }

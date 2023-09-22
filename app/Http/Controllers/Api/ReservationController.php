@@ -12,12 +12,13 @@ class ReservationController extends Controller
     /**
      * Store a new reservation
      *
-     * @param StoreReservationRequest $request
+     * @param  StoreReservationRequest  $request
      * @return ReservationResource
      */
     public function store(StoreReservationRequest $request): ReservationResource
     {
         $reservation = Reservation::createNew($request->name, $request->lastName, $request->date('date'), $request->time, $request->placeId);
+
         return new ReservationResource($reservation);
     }
 }

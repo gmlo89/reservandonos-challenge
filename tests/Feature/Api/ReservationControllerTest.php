@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Api;
 
-use App\Exceptions\ReservandonosException;
 use App\Models\Place;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -25,14 +24,12 @@ class ReservationControllerTest extends TestCase
             'lastName' => fake()->lastName,
             'date' => now()->addDay()->toDateString(),
             'time' => now()->toTimeString(),
-            'placeId' => $place->id
+            'placeId' => $place->id,
         ]);
 
         $response->assertCreated();
     }
-    
-    
-    
+
     /**
      * Test that create a reservation with errors
      *
@@ -46,7 +43,7 @@ class ReservationControllerTest extends TestCase
             'lastName' => fake()->lastName,
             'date' => now()->addDay()->toDateString(),
             'time' => now()->toTimeString(),
-            'placeId' => fake()->randomNumber(1)
+            'placeId' => fake()->randomNumber(1),
         ]);
 
         $response->assertUnprocessable();
