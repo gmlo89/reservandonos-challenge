@@ -14,6 +14,9 @@ npm install
 cp .env.example .env
 php artisan key:generate
 
+# Run migrations
+php artisan key:generate
+
 # build CSS and JS assets
 npm run dev
 # or, if you prefer minified files
@@ -24,6 +27,30 @@ Then launch the server:
 
 ``` bash
 php artisan serve
+```
+
+The Laravel sample project is now up and running! Access it at http://localhost:8000.
+
+
+## Installation with Docker
+
+
+``` bash
+# create .env file
+cp .env.example .env
+
+# Run docker-compose
+docker-compose up -d --build
+
+# Enter in the bash 
+docker exec -it Serve /bin/sh
+
+# Generate a key
+php artisan key:generate
+
+# Run migrations
+php artisan key:generate
+
 ```
 
 The Laravel sample project is now up and running! Access it at http://localhost:8000.
