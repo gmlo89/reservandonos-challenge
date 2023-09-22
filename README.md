@@ -32,7 +32,7 @@ php artisan serve
 The Laravel sample project is now up and running! Access it at http://localhost:8000.
 
 
-## Installation with Docker
+## Installation with Docker (Doesn't work)
 
 
 ``` bash
